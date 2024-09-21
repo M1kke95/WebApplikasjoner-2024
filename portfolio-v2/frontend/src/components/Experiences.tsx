@@ -11,9 +11,13 @@ type ExperiencesProps = {
 export default function Experiences({ experiences }: ExperiencesProps) {
   return (
     <div>
-      {experiences.map((experience, index) => (
-        <Experience key={index} description={experience.name} />
-      ))}
+         {experiences.length === 0 ? (
+        <p>Ingen erfaringer</p>
+            ) : (
+        experiences.map((experience, index) => (
+          <Experience key={index} description={experience.name} />
+        ))
+      )}
     </div>
   );
 }
