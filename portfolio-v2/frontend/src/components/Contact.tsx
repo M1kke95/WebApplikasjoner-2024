@@ -9,6 +9,6 @@ export default function Contact ({email}: contactProps){
     }
 
     return (
-            <footer><button onClick={handleButtonClick}>Vis e-post</button></footer>
+            <footer><button onClick={handleButtonClick}>Kontakt på epo</button></footer>
     )
 }

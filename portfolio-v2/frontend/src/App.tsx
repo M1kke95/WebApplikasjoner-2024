@@ -2,6 +2,7 @@ import Projects from './components/Projects';
 import './App.css';
 import Biografi from './components/Biografi';
 import Contact from './components/Contact';
+import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
 
 function App() {
   const projectList = [
@@ -36,9 +37,24 @@ function App() {
 
   return (
     <>
-      <Projects projects={projectList} />
-      <Biografi person={person} />
-      <Contact email={person.email} />
+    <Router>
+      <nav>
+        <Link to="/">Hjem</Link>
+        <Link to="/contact">kontakt</Link>
+      </nav>
+        <Routes>
+          <Route path='/' element= {
+            <>
+          <Projects projects={projectList} />
+          <Biografi person={person} />
+          </>
+          }/>
+          <Route path='/contact' element ={
+            <Contact email={person.email} />
+          }/>
+      
+      </Routes>
+    </Router>
     </>
   );
 }
