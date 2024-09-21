@@ -1,6 +1,7 @@
 import Projects from './components/Projects';
 import './App.css';
 import Biografi from './components/Biografi';
+import Contact from './components/Contact';
 
 function App() {
   const projectList = [
@@ -37,6 +38,7 @@ function App() {
     <>
       <Projects projects={projectList} />
       <Biografi person={person} />
+      <Contact email={person.email} />
     </>
   );
 }
