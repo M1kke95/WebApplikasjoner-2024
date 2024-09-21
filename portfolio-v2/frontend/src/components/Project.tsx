@@ -1,4 +1,4 @@
-type ProjectProps = {
+export type ProjectProps = {
   id: string;
   name: string;
   description: string;

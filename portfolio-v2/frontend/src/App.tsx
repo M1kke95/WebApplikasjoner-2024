@@ -3,9 +3,13 @@ import './App.css';
 import Biografi from './components/Biografi';
 import Contact from './components/Contact';
 import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
+import { useState } from 'react';
+import {ProjectProps} from './components/Project'
+import CreateProject from './components/CreateProject';
 
 function App() {
-  const projectList = [
+    
+  const projectList: ProjectProps[] = [
     {
       id: "1",
       name: "Project 1",
@@ -35,6 +39,13 @@ function App() {
     ]
   };
 
+  const [projects, setProjects] = useState<ProjectProps[]>(projectList);
+
+  const addNewProject = (newProject: ProjectProps) => {
+    setProjects((existingProjects) => [...existingProjects, newProject]);
+    console.log([...projects, newProject]);
+  };
+
   return (
     <>
     <Router>
@@ -45,8 +56,9 @@ function App() {
         <Routes>
           <Route path='/' element= {
             <>
-          <Projects projects={projectList} />
+          <Projects projects={projects} />
           <Biografi person={person} />
+          <CreateProject addNewProject={addNewProject}/>
           </>
           }/>
           <Route path='/contact' element ={
