@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 type ProjectProps = {
   id: string;
   name: string;

@@ -1,5 +1,6 @@
-
-import './App.css'
+import Projects from './components/Projects';
+import './App.css';
+import Biografi from './components/Biografi';
 
 function App() {
   const projectList = [
@@ -21,8 +22,23 @@ function App() {
     },
   ];
 
+  const person = {
+    name: "Halgeir Geirson",
+    degree: "Bachelor IT",
+    points: 180,
+    email: "student@hiof.no",
+    experiences: [
+      { name: "Figma UI for customer X" },
+      { name: "Website for customer Y" }
+    ]
+  };
+
   return (
-  )
+    <>
+      <Projects projects={projectList} />
+      <Biografi person={person} />
+    </>
+  );
 }
 
-export default App
+export default App;
