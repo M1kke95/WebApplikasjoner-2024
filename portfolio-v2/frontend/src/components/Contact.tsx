@@ -11,7 +11,7 @@ export default function Contact ({email}: contactProps){
 
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
-
+    const [submittedData, setSubmittedData] = useState(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
       };
@@ -20,12 +20,20 @@ export default function Contact ({email}: contactProps){
         setMessage(event.target.value)
     }
 
-    const handleSubmit = (event: React.FormEvent) =>{
-        event.preventDefault
-        console.log(event)
-    }
-
-
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
+    
+        if (name === '' || message === '') {
+          alert('Vennligst skriv i feltene.');
+          return;
+        }
+    
+        setSubmittedData({ name, message });
+        console.log(name, message)
+        
+        setName('');
+        setMessage('');
+      };
 
     return (
         <>
