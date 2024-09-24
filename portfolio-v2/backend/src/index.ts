@@ -10,7 +10,7 @@ const projectList = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "01.01.2023",
     endDate: "01.02.2023",
-    imageUrl: "https://example.com/image1.jpg"
+    imageUrl: "image1.jpg"
   },
   {
     id: "2",
@@ -18,7 +18,7 @@ const projectList = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
-    imageUrl: "https://example.com/image2.jpg"
+    imageUrl: "https://www.uochb.cz/upload/files/ed/dc/eddc6b266ebe570534e85e66f784cbee93441075.jpg"
   },
   {
     id: "3",
@@ -26,7 +26,7 @@ const projectList = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
-    imageUrl: "https://example.com/image3.jpg"
+    imageUrl: "image3.jpg"
   },
   {
     id: "4",
@@ -34,7 +34,7 @@ const projectList = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
-    imageUrl: "https://example.com/image4.jpg"
+    imageUrl: "image4.jpg"
   },
   {
     id: "5",
@@ -42,7 +42,7 @@ const projectList = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
-    imageUrl: "https://example.com/image5.jpg"
+    imageUrl: "image5.jpg"
   },
 ];
 

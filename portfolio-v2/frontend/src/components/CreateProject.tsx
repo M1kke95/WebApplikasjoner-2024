@@ -3,9 +3,10 @@ import { ProjectProps } from "./Project";
 
 type CreateProjectProps = {
     addNewProject: (project: ProjectProps) => void;
+    closeForm: () => void;
 }
 
-export default function CreateProject({ addNewProject }: CreateProjectProps){
+export default function CreateProject({ addNewProject, closeForm }: CreateProjectProps) {
     const [project, setProject] = useState({
         id: '',
         name: '',
@@ -15,19 +16,18 @@ export default function CreateProject({ addNewProject }: CreateProjectProps){
         imageUrl: ''
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
-        const {name, value} = event.target;
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
 
         setProject((existingProjects) => ({
-            ...existingProjects,[name]: value,
-        }))
+            ...existingProjects, [name]: value,
+        }));
     }
 
-    const handleSubmit = (event: React.FormEvent) =>{
+    const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-
-        addNewProject(project)
-        console.log(project)
+        addNewProject(project);
+        console.log(project);
         setProject({
             id: '',
             name: '',
@@ -35,24 +35,54 @@ export default function CreateProject({ addNewProject }: CreateProjectProps){
             startDate: '',
             endDate: '',
             imageUrl: ''
-        })
+        });
     }
 
-    return(
-        <section className="projectSection">
-            <form onSubmit={handleSubmit} className="projectCreation">
-                <input type="text" id="projectName"  name="name" placeholder="name" 
-                    value={project.name} onChange={handleChange}/>
-                <textarea name="description" id="projectDescription" placeholder="Beskrivelse" 
-                    value={project.description} onChange={handleChange} />
-                <input type="text" name="startDate" id="startDateProject" placeholder="Start Date"
-                    value={project.startDate} onChange={handleChange}/>
-                <input type="text" name="endDate" id="endDateProject" placeholder="end Date"
-                    value={project.endDate} onChange={handleChange}/>
-                <input type="text" name="imageUrl" id="projectImage" placeholder="imgURL"
-                    value={project.imageUrl} onChange={handleChange}/>
+    return (
+        <section>
+            <form onSubmit={handleSubmit} id="projectCreation">
+                <input
+                    type="text"
+                    id="projectName"
+                    name="name"
+                    placeholder="Name"
+                    value={project.name}
+                    onChange={handleChange}
+                />
+                <textarea
+                    name="description"
+                    id="projectDescription"
+                    placeholder="Beskrivelse"
+                    value={project.description}
+                    onChange={handleChange}
+                />
+                <input
+                    type="date"
+                    name="startDate"
+                    id="startDateProject"
+                    placeholder="Start Date"
+                    value={project.startDate}
+                    onChange={handleChange}
+                />
+                <input
+                    type="date"
+                    name="endDate"
+                    id="endDateProject"
+                    placeholder="End Date"
+                    value={project.endDate}
+                    onChange={handleChange}
+                />
+                <input
+                    type="text"
+                    name="imageUrl"
+                    id="projectImage"
+                    placeholder="Image URL"
+                    value={project.imageUrl}
+                    onChange={handleChange}
+                />
                 <button type="submit">Legg til dine prosjekter</button>
+                <button type="button" className="close-btn" onClick={closeForm}>Close</button>
             </form>
         </section>
-    )
+    );
 }

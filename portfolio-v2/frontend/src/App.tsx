@@ -49,14 +49,11 @@ function App() {
       <Header  />
         <Routes>
           <Route path='/' element= {
-            <body>
             <main id='mainSection'>
             <div id='app'></div>
           <Projects projects={projects} removeProject={removeProject} />
           <Biografi person={person} />
-          <CreateProject addNewProject={addNewProject}/>
           </main>
-          </body>
           }/>
           <Route path='/contact' element ={
             <Contact email={person.email} />

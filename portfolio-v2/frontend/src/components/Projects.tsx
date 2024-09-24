@@ -1,6 +1,5 @@
 import Project from "./Project";
 
-
 type ProjectType = {
   id: string;
   name: string;
@@ -9,7 +8,6 @@ type ProjectType = {
   endDate: string;
   imageUrl: string;
 };
-
 
 type ProjectsProps = {
   projects: ProjectType[];
