@@ -1,19 +1,17 @@
-type HeaderProps = {
-  person: {
-    name: string;
-    degree: string;
-    points: number;
-    email: string;
-  };
-};
+import { Link } from 'react-router-dom';
 
-export default function Header({ person }: HeaderProps) {
+const Header = () => {
   return (
     <header>
-      <h1>{person.name}</h1>
-      <p>{person.degree}</p>
-      <p>{person.points} points</p>
-      <p>Contact: {person.email}</p>
+      <nav>
+        <ul>    
+          <li><Link to="/">Hjem</Link></li>
+          <li><Link to="/contact">Kontakt</Link></li>
+          <li><button id=''>CreateProject</button></li> 
+        </ul>
+      </nav>
     </header>
   );
 }
+
+export default Header;

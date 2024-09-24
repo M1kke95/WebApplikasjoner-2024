@@ -3,12 +3,25 @@ import './App.css';
 import Biografi from './components/Biografi';
 import Contact from './components/Contact';
 import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {ProjectProps} from './components/Project'
 import CreateProject from './components/CreateProject';
+import Header from './components/Header';
 
 function App() {
  
+  const [projects, setProjects] = useState<ProjectProps[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const response = await fetch('http://localhost:3999/projects')
+      const data = await response.json();
+      setProjects(data)
+    }
+
+    fetchProjects()
+   }, [])
+
   const person = {
     name: "Halgeir Geirson",
     degree: "Bachelor IT",
@@ -20,7 +33,6 @@ function App() {
     ]
   };
 
-  const [projects, setProjects] = useState<ProjectProps[]>(projectList);
 
   const addNewProject = (newProject: ProjectProps) => {
     setProjects((existingProjects) => [...existingProjects, newProject]);
@@ -34,23 +46,23 @@ function App() {
   return (
     <>
     <Router>
-      <nav>
-        <Link to="/">Hjem</Link>
-        <Link to="/contact">kontakt</Link>
-      </nav>
+      <Header  />
         <Routes>
           <Route path='/' element= {
-            <>
+            <body>
+            <main id='mainSection'>
+            <div id='app'></div>
           <Projects projects={projects} removeProject={removeProject} />
           <Biografi person={person} />
           <CreateProject addNewProject={addNewProject}/>
-          </>
+          </main>
+          </body>
           }/>
           <Route path='/contact' element ={
             <Contact email={person.email} />
           }/>
-      
       </Routes>
+     
     </Router>
     </>
   );

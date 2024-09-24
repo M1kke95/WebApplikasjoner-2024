@@ -1,5 +1,5 @@
 import Experiences from "./Experiences";
-import Header from "./Header";
+import Header from "./InformationPerson";
 
 type PersonProps = {
   person: {

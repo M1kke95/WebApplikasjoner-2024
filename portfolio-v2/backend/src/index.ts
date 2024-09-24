@@ -7,7 +7,7 @@ const projectList = [
   {
     id: "1",
     name: "Project 1",
-    description: "Description of project 1",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "01.01.2023",
     endDate: "01.02.2023",
     imageUrl: "https://example.com/image1.jpg"
@@ -15,7 +15,7 @@ const projectList = [
   {
     id: "2",
     name: "Project 2",
-    description: "Description of project 2",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
     imageUrl: "https://example.com/image2.jpg"
@@ -23,7 +23,7 @@ const projectList = [
   {
     id: "3",
     name: "Project 3",
-    description: "Description of project 3",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
     imageUrl: "https://example.com/image3.jpg"
@@ -31,7 +31,7 @@ const projectList = [
   {
     id: "4",
     name: "Project 4",
-    description: "Description of project 4",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
     imageUrl: "https://example.com/image4.jpg"
@@ -39,7 +39,7 @@ const projectList = [
   {
     id: "5",
     name: "Project 5",
-    description: "Description of project 5",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque massa vitae lectus aliquam, sit amet tempus orci auctor. Mauris tortor diam, laoreet nec nulla in, scelerisque vulputate ipsum. Mauris varius, nisi non pharetra congue, nulla sapien condimentum lacus, sed euismod risus nisl id nisi. Pellentesque sit amet tristique ligula, id consequat est. Vestibulum vulputate eros at sapien tempor rhoncus. Fusce purus risus, consequat nec pretium et",
     startDate: "02.01.2023",
     endDate: "02.02.2023",
     imageUrl: "https://example.com/image5.jpg"

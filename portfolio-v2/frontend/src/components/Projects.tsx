@@ -18,13 +18,14 @@ type ProjectsProps = {
 
 export default function Projects({ projects, removeProject }: ProjectsProps) {
   return (
-    <div>
+    <section id="projectSection">
       {projects.map((project) => (
-        <div key={project.id}>
-          <Project {...project} />
-          <button onClick={() => removeProject(project.id)}>Fjern prosjekt</button>
-        </div>
+        <Project 
+          key={project.id} 
+          {...project} 
+          removeProject={removeProject}
+        />
       ))}
-    </div>
+    </section>
   );
 }
