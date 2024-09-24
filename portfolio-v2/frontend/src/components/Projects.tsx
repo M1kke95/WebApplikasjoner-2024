@@ -13,21 +13,17 @@ type ProjectType = {
 
 type ProjectsProps = {
   projects: ProjectType[];
+  removeProject: (id: string) => void;
 };
 
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects, removeProject }: ProjectsProps) {
   return (
     <div>
       {projects.map((project) => (
-        <Project
-          key={project.id} 
-          id={project.id}
-          name={project.name}
-          description={project.description}
-          startDate={project.startDate}
-          endDate={project.endDate}
-          imageUrl={project.imageUrl}
-        />
+        <div key={project.id}>
+          <Project {...project} />
+          <button onClick={() => removeProject(project.id)}>Fjern prosjekt</button>
+        </div>
       ))}
     </div>
   );
