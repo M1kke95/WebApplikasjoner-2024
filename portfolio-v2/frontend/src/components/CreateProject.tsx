@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProjectType } from "../types/types";
 import { habitSchema } from "../features/habits/validate";
+import { v4 as uuidv4 } from 'uuid';
 
 
 type CreateProjectProps = {
@@ -10,13 +11,15 @@ type CreateProjectProps = {
 
 export default function CreateProject({ addNewProject, closeForm }: CreateProjectProps) {
     const [project, setProject] = useState({
-        id: '',
+        id: uuidv4(),
         name: '',
         description: '',
         startDate: '',
         endDate: '',
         imageUrl: ''
     });
+
+    
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -29,14 +32,20 @@ export default function CreateProject({ addNewProject, closeForm }: CreateProjec
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        const validateResult = habitSchema.safeParse(project)
+        const projectFormated = {
+            ...project,
+            startDate: new Date(project.startDate).toISOString(),
+            endDate: new Date(project.endDate).toISOString()
+        }
+
+        const validateResult = habitSchema.safeParse(projectFormated)
 
         if(!validateResult.success){
             const validationErrors = validateResult.error.errors.map(error => error.message).join(", ")
             console.log(validationErrors)
             return
         }
-        addNewProject(project);
+        addNewProject(projectFormated);
         console.log(project);
         setProject({
             id: '',
@@ -96,3 +105,5 @@ export default function CreateProject({ addNewProject, closeForm }: CreateProjec
         </section>
     );
 }
+
+

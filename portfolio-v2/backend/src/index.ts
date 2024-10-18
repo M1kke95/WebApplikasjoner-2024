@@ -50,9 +50,6 @@ const projectList = [
 const app = new Hono()
 app.use("*", cors());
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
 
 app.get('/projects', (c) => {
 
