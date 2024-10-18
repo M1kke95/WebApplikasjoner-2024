@@ -1,12 +1,5 @@
-export type ProjectProps = {
-  id: string;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  imageUrl: string;
-  removeProject: (id: string) => void; 
-};
+import { ProjectProps } from "../types/types";
+
 
 export default function Project({
     id,

@@ -1,13 +1,7 @@
+import { ProjectType } from "../types/types";
 import Project from "./Project";
 
-type ProjectType = {
-  id: string;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  imageUrl: string;
-};
+
 
 type ProjectsProps = {
   projects: ProjectType[];

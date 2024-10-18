@@ -1,8 +1,6 @@
 import { useState } from "react";
+import { contactProps } from "../types/types";
 
-type contactProps = {
-    email: string;
-}
 
 export default function Contact ({email}: contactProps){
     const handleButtonClick = () => {

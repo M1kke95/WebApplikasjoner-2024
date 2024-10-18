@@ -3,15 +3,14 @@ import './App.css';
 import Biografi from './components/Biografi';
 import Contact from './components/Contact';
 import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import {ProjectProps} from './components/Project'
-import CreateProject from './components/CreateProject';
 import Header from './components/Header';
+import useProjects from './hooks/useProjects';
+
 
 function App() {
- 
-  const [projects, setProjects] = useState<ProjectProps[]>([]);
-
+  const { projects, loading, removeProject } = useProjects()
+  //const [projects, setProjects] = useState<ProjectProps[]>([]);
+/*
   useEffect(() => {
     const fetchProjects = async () => {
       const response = await fetch('http://localhost:3999/projects')
@@ -20,7 +19,7 @@ function App() {
     }
 
     fetchProjects()
-   }, [])
+   }, [])*/
 
   const person = {
     name: "Halgeir Geirson",
@@ -33,7 +32,7 @@ function App() {
     ]
   };
 
-
+/*
   const addNewProject = (newProject: ProjectProps) => {
     setProjects((existingProjects) => [...existingProjects, newProject]);
     console.log([...projects, newProject]);
@@ -41,7 +40,7 @@ function App() {
 
   const removeProject = (id: string) =>{
     setProjects((existingProjects) => existingProjects.filter(project => project.id !== id))
-  }
+  }*/
 
   return (
     <>

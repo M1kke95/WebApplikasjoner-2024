@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { ProjectProps } from "./Project";
+import { ProjectType } from "../types/types";
+import { habitSchema } from "../features/habits/validate";
+
 
 type CreateProjectProps = {
-    addNewProject: (project: ProjectProps) => void;
+    addNewProject: (project: ProjectType) => void;
     closeForm: () => void;
 }
 
@@ -26,6 +28,14 @@ export default function CreateProject({ addNewProject, closeForm }: CreateProjec
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+
+        const validateResult = habitSchema.safeParse(project)
+
+        if(!validateResult.success){
+            const validationErrors = validateResult.error.errors.map(error => error.message).join(", ")
+            console.log(validationErrors)
+            return
+        }
         addNewProject(project);
         console.log(project);
         setProject({

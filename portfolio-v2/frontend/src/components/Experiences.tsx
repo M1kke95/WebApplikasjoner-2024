@@ -1,8 +1,7 @@
+import { ExperienceType } from "../types/types";
 import Experience from "./Experience";
 
-type ExperienceType = {
-  name: string;  
-};
+
 
 type ExperiencesProps = {
   experiences: ExperienceType[];

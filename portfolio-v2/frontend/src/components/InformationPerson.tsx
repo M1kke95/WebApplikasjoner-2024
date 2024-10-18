@@ -1,11 +1,5 @@
-type HeaderProps = {
-  person: {
-    name: string;
-    degree: string;
-    points: number;
-    email: string;
-  };
-};
+import { HeaderProps } from "../types/types";
+
 
 export default function InformationAboutPerson({ person }: HeaderProps) {
   return (
