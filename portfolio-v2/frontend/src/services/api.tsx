@@ -1,5 +1,6 @@
-import { DATA_URL } from "../config/config";
+import { DATA_URL, SINGLE_PROJECT_UTL } from "../config/config";
 import { habitSchema, habitsSchema } from "../features/habits/validate";
+import { ProjectType } from "../types/types";
 
 interface Project {
     id: string;
@@ -13,42 +14,46 @@ interface Project {
 
 export const fetchProjects = async () => {
     try {
-        const response = await fetch(DATA_URL)
-        const data: Project[] = await response.json()
+        const response = await fetch(DATA_URL);
+        
+        if (!response.ok) {
+            throw new Error("Feil ved henting av prosjekter: " + response.statusText);
+        }
+        const jsonResponse = await response.json();
 
-        const safeData = habitSchema.array().safeParse(data)
+        if (!jsonResponse.success) {
+            throw new Error("Feil i API-respons: " + jsonResponse.error.message);
+        }
+        const safeData = habitSchema.array().safeParse(jsonResponse.data);
 
-        if(!safeData){
-            throw new Error("Ugyldig struktur på dataen")
+        if (!safeData.success) {
+            throw new Error("Ugyldig struktur på dataen");
         }
 
-        return data
+        return safeData.data; 
     } catch (error) {
-        console.log("Error: ", error)
-        throw error
+        console.log("Error: ", error);
+        throw error; 
+    }
+};
+
+export const fetchSingleProject = async (id: string) => {
+    try {
+        const response = await fetch(`${SINGLE_PROJECT_UTL.replace(':id', id)}`);
+
+        if(!response.ok){
+            throw new Error(`Can't find Project with Id : ${id}`)
+        }
+
+        const project = await response.json()
+        return project;
+    } catch (error) {
+        console.error(error)
     }
 }
-/*
-export const fetchProjects = async () => {
-    try {
-        const response = await fetch('http://localhost:3999/projects');  // Bruk den direkte URL-en her
-        if (!response.ok) {
-            console.error(`Network response was not ok: ${response.statusText}`);
-            throw new Error(`Could not fetch projects, status: ${response.status}`);
-        }
-
-        const data: Project[] = await response.json();
-        console.log("Fetched projects: ", data);  // Logg dataene for å verifisere
-        return data;
-    } catch (error) {
-        console.error("Error fetching projects: ", error);
-        throw error;
-    }
-}*/
-
 
 export const removeAPIProject = async (id: string) => {
-    const response = await fetch(DATA_URL,{
+    const response = await fetch(`${SINGLE_PROJECT_UTL.replace(':id', id)}`,{
     method: 'DELETE'
     });
    
@@ -58,12 +63,30 @@ export const removeAPIProject = async (id: string) => {
     return await response.json()
 }
 
-const list = async() => {
-    try {
-        const habits = await fetch(DATA_URL)
-        console.log(habitsSchema.safeParse(habits))
-        return habitsSchema.safeParse(habits)
-    } catch (error) {
-        console.log(error)
+
+export const UpdateApiProject = async(id: string, updatedProject: Partial<ProjectType>) => {
+    const response = await fetch(`${DATA_URL}/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify(updatedProject)
+    })
+    return response.json()
+}
+
+export const addAPIProject = async (newProject: ProjectType) => {
+    const response = await fetch(DATA_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newProject)
+    });
+
+    if (!response.ok) {
+        throw new Error('Cannot add the project');
     }
+
+    return await response.json();
 }

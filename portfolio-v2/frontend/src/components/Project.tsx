@@ -13,7 +13,7 @@ export default function Project({
   }: ProjectProps) {
 
     const formattedStart = format(new Date(startDate),'dd-MM-yyyy')
-    const formattedEnd = format(new Date(startDate),'dd-MM-yyyy')
+    const formattedEnd = format(new Date(endDate),'dd-MM-yyyy')
 
     return (
       <div className="project-card">

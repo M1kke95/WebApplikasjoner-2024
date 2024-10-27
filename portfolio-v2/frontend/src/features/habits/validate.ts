@@ -3,11 +3,11 @@ import { z } from "zod"
 export {habitSchema, habitsSchema};
 
 const habitSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string(),
     name: z.string(),
     description: z.string(),
-    startDate: z.string().datetime(),
-    endDate: z.string().datetime(),
+    startDate: z.string(),
+    endDate: z.string(),
     imageUrl: z.string().optional()
 })
 

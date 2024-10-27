@@ -1,9 +1,12 @@
 import { serve } from '@hono/node-server'
+import { v4 as uuidv4 } from 'uuid';
+
 import { Hono } from 'hono'
 import { cors } from "hono/cors";
+import { Result } from '../types';
 
 
-const projectList = [
+let projectList = [
   {
     id: "1",
     name: "Project 1",
@@ -51,12 +54,66 @@ const app = new Hono()
 app.use("*", cors());
 
 
-app.get('/projects', (c) => {
 
-   return c.json(projectList)
-  
-  
+app.get('/projects', (c) => {
+  const result: Result<typeof projectList> = {
+    success: true,
+    data: projectList,
+  };
+  return c.json(result);
+});
+
+app.get('/projects/:id', (c) => {
+  const id =  c.req.param('id')
+
+  const project = projectList.filter((singleProject) => singleProject.id === id)
+  return c.json(project)
 })
+
+
+app.post('/projects', async (c) => {
+  const data = await c.req.json()
+
+  if(!data){
+    return c.json({message: "missing data"}, 400)
+  }
+
+  const newProject = {
+    id: uuidv4(),
+    name: data.name,
+    description: data.description,
+    startDate: new Date(data.startDate).toISOString(),
+    endDate: new Date(data.endDate).toISOString(),
+    imageUrl: data.imageUrl || ''
+  }
+
+    projectList.push(newProject)
+    return c.json(newProject, 201)
+
+})
+
+app.delete('/projects/:id', (c) => {
+  const id = c.req.param('id')
+
+  projectList = projectList.filter((project) => project.id !== id)
+  return c.json({message: "slettet", data: projectList})
+})
+
+app.patch('/projects/:id', async (c) => {
+  const id = c.req.param('id');
+  const { name, description, startDate, endDate, imageUrl } = await c.req.json();
+
+  projectList = projectList.map((project) => 
+    project.id === id ? { ...project, 
+      name: name || project.name,
+      description: description || project.description,
+      startDate: startDate || project.startDate,
+      endDate: endDate || project.endDate,
+      imageUrl: imageUrl || project.imageUrl 
+    } : project
+  );
+})
+
 
 const port = 3999
 console.log(`Server is running on port ${port}`)
@@ -65,4 +122,6 @@ serve({
   fetch: app.fetch,
   port
 })
+
+
 
