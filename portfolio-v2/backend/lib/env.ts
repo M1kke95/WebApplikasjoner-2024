@@ -3,6 +3,7 @@ import "dotenv/config";
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
+
 export type ServerEnv = typeof env;
 
 export const env = createEnv({
@@ -12,7 +13,7 @@ export const env = createEnv({
       .default("development"),
     FRONTEND_URL: z.coerce.string(),
     PORT: z.coerce.number().default(3999),
-    DATABASE_URL: z.string().endsWith(".db"),
+    DATABASE_URL: z.string().endsWith(".db").default("default.db"),
   },
   runtimeEnv: process.env, 
   emptyStringAsUndefined: true,

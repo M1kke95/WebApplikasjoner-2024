@@ -5,6 +5,7 @@ import BetterSqlite3 from "better-sqlite3";
 
 
 export const db: Database = new BetterSqlite3(env.DATABASE_URL);
+console.log("Database URL:", env.DATABASE_URL);
 
 export type DB = typeof db;
 
