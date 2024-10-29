@@ -1,11 +1,12 @@
 export interface ProjectType {
-    id: string;
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    imageUrl: string;
-    
+  id: string;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  imageUrl?: string;
+  publishedAt: string; 
+  publicStatus: boolean; 
 }
 
 export type ProjectProps = {
@@ -14,8 +15,11 @@ export type ProjectProps = {
   description: string;
   startDate: string;
   endDate: string;
-  imageUrl: string;
+  imageUrl?: string;
+  publishedAt: string; 
+  publicStatus: boolean; 
   removeProject: (id: string) => void; 
+  addProject: (newProject: ProjectType) => Promise<void>;
 };
 
 export type PersonProps = {

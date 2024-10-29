@@ -15,8 +15,8 @@ export const seed = async (db: DB) => {
 
 
     const insertProject = db.prepare(`
-      INSERT INTO projects (id, name, description, startDate, endDate, imageUrl)
-      VALUES (?, ?, ?, ?, ?, ?);
+      INSERT INTO projects (id, name, description, startDate, endDate, imageUrl, publishedAt, publicStatus)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?);
     `);
 
     const transaction = db.transaction(() => {
@@ -28,7 +28,9 @@ export const seed = async (db: DB) => {
           project.description,
           project.startDate,
           project.endDate,
-          project.imageUrl
+          project.imageUrl,
+          project.publishedAt,   
+          project.publicStatus === true ? 1 : 0
         );
       }
     });

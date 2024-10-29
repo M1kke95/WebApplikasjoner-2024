@@ -1,6 +1,5 @@
 import { serve } from '@hono/node-server'
 import { v4 as uuidv4 } from 'uuid';
-
 import { Hono } from 'hono'
 import { cors } from "hono/cors";
 import { ProjectType, Result } from '../types';
@@ -28,10 +27,11 @@ app.get('/projects/:id', (c) => {
 })
 
 app.post('/projects', async (c) => {
-  const data = await c.req.json()
+  const data = await c.req.json();
+  console.log("data hentet: ", data)
 
-  if(!data){
-    return c.json({success: false, message:"Missing required data"}, 400)
+  if (!data) {
+    return c.json({ success: false, message: "Missing required data" }, 400);
   }
 
   const newProject = {
@@ -39,20 +39,27 @@ app.post('/projects', async (c) => {
     name: data.name,
     description: data.description,
     startDate: data.startDate,
-    endDate: data. endDate,
-    imageUrl: data.imageUrl || ''
-  }
+    endDate: data.endDate,
+    imageUrl: data.imageUrl || '',
+    publishedAt: data.publishedAt,
+    publicStatus: data.publicStatus !== undefined ? data.publicStatus : true,
+  };
 
+ 
   const insert = db.prepare(`
-    INSERT INTO projects (id, name, description, startDate, endDate, imageUrl)
-    VALUES (?, ?, ?, ?, ?, ?);
+    INSERT INTO projects (id, name, description, startDate, endDate, imageUrl, publishedAt, publicStatus)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
   `);
 
-  insert.run(newProject.id, newProject.name, newProject.description, newProject.startDate, newProject.endDate, newProject.imageUrl)
+  const result = insert.run(newProject.id, newProject.name, newProject.description, newProject.startDate, newProject.endDate, newProject.imageUrl, newProject.publishedAt, newProject.publicStatus ? 1 : 0);
 
-  return c.json(newProject, 201)
+  if (result.changes === 0) {
+    return c.json({ success: false, message: "Failed to insert project into the database" }, 500);
+}
+  
 
-})
+  return c.json(newProject, 201);
+});
 
 app.delete('/projects/:id', async (c) =>{
   const id = c.req.param('id')
@@ -70,7 +77,7 @@ app.delete('/projects/:id', async (c) =>{
 
 app.patch('/projects/:id', async (c) => {
   const id = c.req.param('id')
-  const {name, description, startDate, endDate, imageUrl} = await c.req.json()
+  const {name, description, startDate, endDate, imageUrl, publishedAt, publicStatus} = await c.req.json()
 
   const currentProject = db.prepare('SELECT * FROM projects WHERE id = ?').get(id) as ProjectType;
 
@@ -79,10 +86,12 @@ app.patch('/projects/:id', async (c) => {
   const updatedStartDate = startDate !== undefined ? startDate: currentProject.startDate;
   const updatedEndDate = endDate !== undefined ? endDate: currentProject.endDate;
   const updatedImageUrl = imageUrl !== undefined ? imageUrl: currentProject.imageUrl;
+  const updatedPublishedAt = publishedAt !== undefined ? publishedAt: currentProject.publishedAt
+  const updatedPublicStatus = publicStatus !== undefined ? publicStatus: currentProject.publicStatus
 
   const updateProject = db.prepare(`
     UPDATE projects 
-    SET name = ?, description = ?, startDate = ?, endDate = ?, imageUrl = ?
+    SET name = ?, description = ?, startDate = ?, endDate = ?, imageUrl = ?, publishedAt = ?, publicStatus = ?
     WHERE id = ?;
   `);
 
@@ -92,6 +101,8 @@ app.patch('/projects/:id', async (c) => {
     updatedStartDate,
     updatedEndDate,
     updatedImageUrl,
+    updatedPublishedAt,
+    updatedPublicStatus,
     id
   )
 
@@ -99,66 +110,7 @@ app.patch('/projects/:id', async (c) => {
 })
 
 
-/*
-app.get('/projects', (c) => {
-  const result: Result<typeof projectList> = {
-    success: true,
-    data: projectList,
-  };
-  return c.json(result);
-});*/
-/*
-app.get('/projects/:id', (c) => {
-  const id =  c.req.param('id')
 
-  const project = projectList.filter((singleProject) => singleProject.id === id)
-  return c.json(project)
-})
-
-
-app.post('/projects', async (c) => {
-  const data = await c.req.json()
-
-  if(!data){
-    return c.json({message: "missing data"}, 400)
-  }
-
-  const newProject = {
-    id: uuidv4(),
-    name: data.name,
-    description: data.description,
-    startDate: new Date(data.startDate).toISOString(),
-    endDate: new Date(data.endDate).toISOString(),
-    imageUrl: data.imageUrl || ''
-  }
-
-    projectList.push(newProject)
-    return c.json(newProject, 201)
-
-})
-
-app.delete('/projects/:id', (c) => {
-  const id = c.req.param('id')
-
-  projectList = projectList.filter((project) => project.id !== id)
-  return c.json({message: "slettet", data: projectList})
-})
-
-app.patch('/projects/:id', async (c) => {
-  const id = c.req.param('id');
-  const { name, description, startDate, endDate, imageUrl } = await c.req.json();
-
-  projectList = projectList.map((project) => 
-    project.id === id ? { ...project, 
-      name: name || project.name,
-      description: description || project.description,
-      startDate: startDate || project.startDate,
-      endDate: endDate || project.endDate,
-      imageUrl: imageUrl || project.imageUrl 
-    } : project
-  );
-})
-*/
 
 const port = 3999
 console.log(`Server is running on port ${port}`)

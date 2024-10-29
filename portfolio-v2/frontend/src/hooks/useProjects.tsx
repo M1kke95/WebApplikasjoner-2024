@@ -10,17 +10,19 @@ interface useProjects {
     updateProject: (id: string, updatedProject: Partial<ProjectType>) => Promise<void>;
 }
 
+
 const useProjects = (): useProjects => {
     const [projects, setProjects] = useState<ProjectType[]>([]);
     const [loading, setLoading] = useState(true);
 
+    
     useEffect(() => {
         const getProjects = async () => {
             try {
                 const data = await fetchProjects();
                 setProjects(data);
             } catch (error) {
-                return error;
+                console.error("Error fetching projects:", error);
             } finally {
                 setLoading(false);
             }
@@ -42,7 +44,7 @@ const useProjects = (): useProjects => {
             const createdProject = await addAPIProject(newProject);
             setProjects(prev => [...prev, createdProject]);
         } catch (error) {
-            console.log(error);
+            console.log("Error adding project:", error);
         }
     };
 

@@ -3,7 +3,6 @@ import { seed } from "./seed";
 import { createTables } from "./tables";
 
 export const setup = async (db: DB) => {
-  console.log("Setting up the database...");
   try {
     
     await createTables(db);  
@@ -14,6 +13,5 @@ export const setup = async (db: DB) => {
 };
 
 (async () => {
-  console.log("Invoking setup...");
   await setup(db);
 })();

@@ -1,16 +1,7 @@
 import { DATA_URL, SINGLE_PROJECT_UTL } from "../config/config";
-import { habitSchema, habitsSchema } from "../features/habits/validate";
+import { habitsSchema } from "../features/habits/validate";
 import { ProjectType } from "../types/types";
 
-interface Project {
-    id: string;
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    imageUrl: string;
-    
-}
 
 export const fetchProjects = async () => {
     try {
@@ -21,13 +12,18 @@ export const fetchProjects = async () => {
         }
         const jsonResponse = await response.json();
 
-        if (!jsonResponse.success) {
-            throw new Error("Feil i API-respons: " + jsonResponse.error.message);
+        console.log("API Response:", jsonResponse);
+
+        const projectsData = jsonResponse.data; 
+
+        if (!Array.isArray(projectsData)) {
+            throw new Error("Projects data not found in API response");
         }
-        const safeData = habitSchema.array().safeParse(jsonResponse.data);
+
+        const safeData = habitsSchema.safeParse(projectsData); 
 
         if (!safeData.success) {
-            throw new Error("Ugyldig struktur på dataen");
+            throw new Error("Ugyldig struktur på dataen: " + JSON.stringify(safeData.error));
         }
 
         return safeData.data; 
@@ -75,6 +71,7 @@ export const UpdateApiProject = async(id: string, updatedProject: Partial<Projec
     return response.json()
 }
 
+
 export const addAPIProject = async (newProject: ProjectType) => {
     const response = await fetch(DATA_URL, {
         method: 'POST',
@@ -87,6 +84,7 @@ export const addAPIProject = async (newProject: ProjectType) => {
     if (!response.ok) {
         throw new Error('Cannot add the project');
     }
-
+    console.log("Adding project:", JSON.stringify(newProject));
     return await response.json();
 }
+

@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   const addNewProject = (project: any) => {
-    console.log('Nytt prosjekt lagt til:', project);
+    
   };
 
   return (

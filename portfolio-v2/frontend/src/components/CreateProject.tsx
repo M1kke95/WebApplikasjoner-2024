@@ -3,58 +3,68 @@ import { ProjectType } from "../types/types";
 import { habitSchema } from "../features/habits/validate";
 import { v4 as uuidv4 } from 'uuid';
 
-
 type CreateProjectProps = {
-    addNewProject: (project: ProjectType) => void;
+    addProject: (project: ProjectType) => Promise<void>;
     closeForm: () => void;
 }
 
-export default function CreateProject({ addNewProject, closeForm }: CreateProjectProps) {
+export default function CreateProject({ addProject, closeForm }: CreateProjectProps) {
+    console.log("addProject prop in CreateProject:", addProject);
     const [project, setProject] = useState({
         id: uuidv4(),
         name: '',
         description: '',
         startDate: '',
         endDate: '',
-        imageUrl: ''
+        imageUrl: '',
+        publishedAt: '',
+        publicStatus: false
     });
-
-    
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
-
         setProject((existingProjects) => ({
-            ...existingProjects, [name]: value,
+            ...existingProjects, 
+            [name]: value,
         }));
     }
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        const projectFormated = {
+        const projectFormatted = {
             ...project,
             startDate: new Date(project.startDate).toISOString(),
-            endDate: new Date(project.endDate).toISOString()
+            endDate: new Date(project.endDate).toISOString(),
+            publishedAt: new Date(project.publishedAt).toISOString()
+            
         }
 
-        const validateResult = habitSchema.safeParse(projectFormated)
+        const validateResult = habitSchema.safeParse(projectFormatted);
 
-        if(!validateResult.success){
-            const validationErrors = validateResult.error.errors.map(error => error.message).join(", ")
-            console.log(validationErrors)
-            return
+        if (!validateResult.success) {
+            const validationErrors = validateResult.error.errors.map(error => error.message).join(", ");
+            console.log(validationErrors);
+            return;
         }
-        addNewProject(projectFormated);
-        console.log(project);
-        setProject({
-            id: '',
-            name: '',
-            description: '',
-            startDate: '',
-            endDate: '',
-            imageUrl: ''
-        });
+        
+        try {
+            await addProject(projectFormatted); // Ensure this is awaited
+            console.log("Project submitted:", projectFormatted);
+            setProject({
+                id: uuidv4(),
+                name: '',
+                description: '',
+                startDate: '',
+                endDate: '',
+                imageUrl: '',
+                publishedAt: '',
+                publicStatus: false
+            });
+        } catch (error) {
+            console.error("Error submitting project:", error);
+        }
+        
     }
 
     return (
@@ -75,19 +85,19 @@ export default function CreateProject({ addNewProject, closeForm }: CreateProjec
                     value={project.description}
                     onChange={handleChange}
                 />
+                <label>Start Date</label>
                 <input
                     type="date"
                     name="startDate"
                     id="startDateProject"
-                    placeholder="Start Date"
                     value={project.startDate}
                     onChange={handleChange}
                 />
+                <label>End Date</label>
                 <input
                     type="date"
                     name="endDate"
                     id="endDateProject"
-                    placeholder="End Date"
                     value={project.endDate}
                     onChange={handleChange}
                 />
@@ -99,11 +109,17 @@ export default function CreateProject({ addNewProject, closeForm }: CreateProjec
                     value={project.imageUrl}
                     onChange={handleChange}
                 />
-                <button type="submit">Legg til dine prosjekter</button>
+                <label>Published At</label>
+                <input
+                    type="date"
+                    name="publishedAt"
+                    id="projectPublish"
+                    value={project.publishedAt}
+                    onChange={handleChange}
+                />
+                <button type="submit">Legg til prosjekt</button>
                 <button type="button" className="close-btn" onClick={closeForm}>Close</button>
             </form>
         </section>
     );
 }
-
-

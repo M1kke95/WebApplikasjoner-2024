@@ -19,5 +19,7 @@ export type Result<T> =
         startDate: string;
         endDate: string;
         imageUrl: string;
+        publishedAt: string;
+        publicStatus: boolean;
         
     }

@@ -8,7 +8,9 @@ export const createTables = (db: DB) => {
       description TEXT NOT NULL,
       startDate TEXT NOT NULL,
       endDate TEXT NOT NULL,
-      imageUrl TEXT NOT NULL
+      imageUrl TEXT,
+      publishedAt TEXT NOT NULL, 
+      publicStatus BOOLEAN NOT NULL
     );
   `);
 };
