@@ -1,8 +1,8 @@
-import { ExperienceProps } from "../types/types";
+import { SingleExperienceProps } from "../types/types";
 
 
 
 
-export default function Experience({ description }: ExperienceProps) {
+export default function Experience({ description }: SingleExperienceProps) {
   return <p>{description}</p>;
 }

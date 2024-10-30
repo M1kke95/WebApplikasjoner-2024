@@ -22,6 +22,12 @@ export type ProjectProps = {
   addProject: (newProject: ProjectType) => Promise<void>;
 };
 
+export type ProjectsProp = {
+  projects: ProjectType[];
+    removeProject: (id: string) => Promise<void>;
+    addProject: (newProject: ProjectType) => Promise<void>;
+};
+
 export type PersonProps = {
     person: {
       description: string,
@@ -43,12 +49,16 @@ export type contactProps = {
     email: string; 
 }
 
-export type ExperienceProps = {
+export type SingleExperienceProps = {
     description: string;
 };
 
 export type ExperienceType = {
     name: string;  
+  };
+
+export type ExperiencesProps = {
+    experiences: ExperienceType[];
   };
 
 export type HeaderProps = {
@@ -60,3 +70,8 @@ person: {
     email: string;
 };
 };
+
+export type CreateProjectProps = {
+  addProject: (project: ProjectType) => Promise<void>;
+  closeForm: () => void;
+}

@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { ProjectType } from "../types/types";
+import { CreateProjectProps} from "../types/types";
 import { habitSchema } from "../features/habits/validate";
 import { v4 as uuidv4 } from 'uuid';
 
-type CreateProjectProps = {
-    addProject: (project: ProjectType) => Promise<void>;
-    closeForm: () => void;
-}
 
 export default function CreateProject({ addProject, closeForm }: CreateProjectProps) {
     console.log("addProject prop in CreateProject:", addProject);

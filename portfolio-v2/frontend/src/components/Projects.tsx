@@ -1,15 +1,11 @@
-import { ProjectType } from "../types/types";
+import { ProjectsProp} from "../types/types";
 import Project from "./Project";
 
 
 
-type ProjectsProps = {
-  projects: ProjectType[];
-    removeProject: (id: string) => Promise<void>;
-    addProject: (newProject: ProjectType) => Promise<void>;
-};
 
-export default function Projects({ projects, removeProject, addProject }: ProjectsProps) {
+
+export default function Projects({ projects, removeProject, addProject }: ProjectsProp) {
   return (
     <section id="projectSection">
       {projects.map((project) => (
