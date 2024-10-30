@@ -49,8 +49,11 @@ export default function CreateProject({ addProject, closeForm }: CreateProjectPr
         }
         
         try {
-            await addProject(projectFormatted); // Ensure this is awaited
+            await addProject(projectFormatted); 
             console.log("Project submitted:", projectFormatted);
+
+            closeForm()
+
             setProject({
                 id: uuidv4(),
                 name: '',
@@ -117,7 +120,7 @@ export default function CreateProject({ addProject, closeForm }: CreateProjectPr
                     value={project.publishedAt}
                     onChange={handleChange}
                 />
-                <button type="submit">Legg til prosjekt</button>
+                <button type="submit" onSubmit={handleSubmit}>Legg til prosjekt</button>
                 <button type="button" className="close-btn" onClick={closeForm}>Close</button>
             </form>
         </section>

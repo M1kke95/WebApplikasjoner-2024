@@ -24,19 +24,22 @@ const ProjectPage = () => {
     const toggleCreateProjectForm = () => setIsCreating(!isCreating);
 
     return (
-      <main id="mainSection">
+        <main id="mainSection">
           <div id="app"></div>
+          <button onClick={toggleCreateProjectForm}>Legg til prosjekt</button>
           <Biografi person={person} />
-          {isCreating ? (
-              <CreateProject addProject={addProject} closeForm={toggleCreateProjectForm} />
-          ) : (
+          <Projects projects={projects} removeProject={removeProject} addProject={addProject} />
+
+          {isCreating && (
               <>
-                  <button onClick={toggleCreateProjectForm}>Legg til prosjekt</button>
-                  <Projects projects={projects} removeProject={removeProject} addProject={addProject} />
+                  <div id="overlay" onClick={toggleCreateProjectForm}></div>
+                  <div className="centered-form">
+                      <CreateProject addProject={addProject} closeForm={toggleCreateProjectForm} />
+                  </div>
               </>
           )}
       </main>
-  );
-}
+    );
+  }
 
 export default ProjectPage;

@@ -7,7 +7,7 @@ export default function Contact ({email}: contactProps){
         alert(`Michael's epost er: ${email}`)
     }
 
-    const [name, setName] = useState('')
+    const [name, setName] = useState<string>('')
     const [message, setMessage] = useState('')
     const [submittedData, setSubmittedData] = useState(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
