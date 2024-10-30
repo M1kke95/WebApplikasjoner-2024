@@ -10,6 +10,7 @@ type ExperiencesProps = {
 export default function Experiences({ experiences }: ExperiencesProps) {
   return (
     <div>
+      <p>Min erfaring:</p>
          {experiences.length === 0 ? (
         <p>Ingen erfaringer</p>
             ) : (

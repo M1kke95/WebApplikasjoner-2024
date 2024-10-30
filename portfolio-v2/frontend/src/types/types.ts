@@ -24,6 +24,8 @@ export type ProjectProps = {
 
 export type PersonProps = {
     person: {
+      description: string,
+      image: string;
       name: string;
       degree: string;
       points: number;
@@ -33,6 +35,9 @@ export type PersonProps = {
   };
 
 
+export type BiografiProps = PersonProps & {
+  toggleCreateProjectForm: () => void;
+};
 
 export type contactProps = {
     email: string; 
@@ -48,6 +53,7 @@ export type ExperienceType = {
 
 export type HeaderProps = {
 person: {
+    description: string,
     name: string;
     degree: string;
     points: number;
