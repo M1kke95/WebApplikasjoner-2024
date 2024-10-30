@@ -3,6 +3,7 @@ import Biografi from "../components/Biografi";
 import Projects from "../components/Projects";
 import CreateProject from "../components/CreateProject"; 
 import useProjects from "../hooks/useProjects";
+import { Link } from "react-router-dom";
 
 const ProjectPage = () => {
     const { projects, removeProject, addProject } = useProjects();
@@ -12,7 +13,7 @@ const ProjectPage = () => {
 
     const person = {
         description: "Jeg er Halgeir Geirson, jeg er student på Høgskolen i Østfold og går studerer informatikk. Jeg har en brennende interesse for design og utvikling. I tillegg til studiene jobber jeg deltid som frilans utvikler. Jeg er kjent for å forstå kundenes behov og gjøre deres tanker til virkelighet. Jeg har en sterk arbeidsmoral og ønsker å lære mer, jeg er på utkikk etter nye muligheter for læring og bidra til nye spennende prosjekter.",
-        image: "https://api.deepai.org/job-view-file/e2ba3201-cb3d-4e3a-bcd8-dd9bcaeb1a77/outputs/output.jpg?art-image=true",
+        image: "https://cdn.pixabay.com/photo/2023/09/24/05/37/ai-generated-8272177_1280.jpg", //hentet herfra https://pixabay.com/no/illustrations/ai-generert-mann-90-tallet-%C3%A5rgang-8272177/
         name: "Halgeir Geirson",
         degree: "Bachelor IT",
         points: 180,
@@ -27,20 +28,24 @@ const ProjectPage = () => {
 
     return (
         <main id="mainSection">
-          <div id="app"></div>
-          <Biografi person={person} toggleCreateProjectForm={toggleCreateProjectForm} />
-          <Projects projects={projects} removeProject={removeProject} addProject={addProject} />
+            <div id="app"></div>
+            <Biografi person={person} toggleCreateProjectForm={toggleCreateProjectForm} />
+            <Projects projects={projects} removeProject={removeProject} addProject={addProject} limit={2} />
 
-          {isCreating && (
-              <>
-                  <div id="overlay" onClick={toggleCreateProjectForm}></div>
-                  <div className="centered-form">
-                      <CreateProject addProject={addProject} closeForm={toggleCreateProjectForm} />
-                  </div>
-              </>
-          )}
-      </main>
+            <Link to="/projects">Se alle prosjekter</Link>
+
+            {isCreating && (
+                <>
+                    <div id="overlay" onClick={toggleCreateProjectForm}></div>
+                    <div className="centered-form">
+                        <CreateProject addProject={addProject} closeForm={toggleCreateProjectForm} />
+                    </div>
+                </>
+            )}
+        </main>
     );
 }
+
+
 
 export default ProjectPage;

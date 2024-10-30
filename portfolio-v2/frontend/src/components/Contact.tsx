@@ -9,7 +9,7 @@ export default function Contact ({email}: contactProps){
 
     const [name, setName] = useState<string>('')
     const [message, setMessage] = useState('')
-    const [submittedData, setSubmittedData] = useState(null);
+    const [submittedData, setSubmittedData] = useState<{ name: string; message: string } | null>(null); 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
       };
@@ -33,20 +33,23 @@ export default function Contact ({email}: contactProps){
         setMessage('');
       };
 
-    return (
+      return (
         <>
-            <h2>Kontakt meg</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Navn:
-                    <input type="text" value={name} onChange={handleChange} placeholder="Skriv ditt navn" />
-                </label>
-                <label>Melding: 
-                    <textarea value={message} onChange={handleMessageChange} placeholder="skriv din melding"/>
-                </label>
-                <button type="submit">Send</button>
-            </form>
-            <footer><button onClick={handleButtonClick}>Kontakt på epost</button></footer>
+            <div className="form-container">
+                <h2>Kontakt meg</h2>
+                <p>Har du prosjekter og er på utkikk etter en utvikler kontakt meg gjerne!</p>
+                <p>Skriv hva ønsket ditt omhandler så vil jeg komme i kontakt med deg når jeg har mulighet!</p>
+                <form onSubmit={handleSubmit} id="projectCreation">
+                    <label>
+                        Navn:
+                        <input type="text" value={name} onChange={handleChange} placeholder="Skriv ditt navn" />
+                    </label>
+                    <label>Melding: 
+                        <textarea value={message} onChange={handleMessageChange} placeholder="Skriv din melding"/>
+                    </label>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
         </>
-    )
+    );
 }

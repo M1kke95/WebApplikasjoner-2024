@@ -1,14 +1,12 @@
-import { ProjectsProp} from "../types/types";
+import { ProjectsProp } from "../types/types";
 import Project from "./Project";
 
-
-
-
-
-export default function Projects({ projects, removeProject, addProject }: ProjectsProp) {
+export default function Projects({ projects, removeProject, addProject, limit }: ProjectsProp & { limit?: number }) {
+  const displayedProjects = limit ? projects.slice(0, limit) : projects; 
+  
   return (
     <section id="projectSection">
-      {projects.map((project) => (
+      {displayedProjects.map((project) => (
         <Project 
           key={project.id} 
           {...project} 
