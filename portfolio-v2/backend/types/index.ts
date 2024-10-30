@@ -23,3 +23,10 @@ export type Result<T> =
         publicStatus: boolean;
         
     }
+
+   export type ProjectRepository = {
+      list: (query?: Record<string, string>) => Promise<Result<ProjectType[]>>;
+      create: (data: ProjectType) => Promise<Result<ProjectType>>;
+    };
+
+    

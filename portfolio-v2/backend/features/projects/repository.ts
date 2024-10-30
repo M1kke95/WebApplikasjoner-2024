@@ -42,12 +42,14 @@ export const createProjectRepository = (db: DB): ProjectRepository => {
                 description: data.description,
                 startDate: data.startDate,
                 endDate: data.endDate,
-                imageUrl: data.imageUrl || ''
+                imageUrl: data.imageUrl || '',
+                publishedAt: data.publishedAt,
+                publicStatus: data.publicStatus
             }
 
             const query = db.prepare(`
-                INSERT INTO projects (id, name, description, startDate, endDate, imageUrl)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO projects (id, name, description, startDate, endDate, imageUrl, publishedAt, publicStatus)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `);
             
             const result = query.run(
@@ -56,7 +58,9 @@ export const createProjectRepository = (db: DB): ProjectRepository => {
                 projectDB.description,
                 projectDB.startDate,
                 projectDB.endDate,
-                projectDB.imageUrl
+                projectDB.imageUrl,
+                projectDB.publishedAt,
+                projectDB.publicStatus
             )
 
             return{
